@@ -16,15 +16,13 @@ namespace Bonobo.Git.Server.Git.GitLfs
             if (!string.IsNullOrEmpty(UserConfiguration.Current.LfsPath))
                 lfsPath = UserConfiguration.Current.LfsPath;
             else
-                lfsPath = Path.Combine(UserConfiguration.Current.RepositoryPath, @"..\Lfs");
-                //lfsPath = UserConfiguration.Current.RepositoryPath;
+                lfsPath = UserConfiguration.Current.RepositoryPath;
 
-            string candidate1 = HttpContext.Current.Server.MapPath(lfsPath);
-            if (!Directory.Exists(candidate1))
-                Directory.CreateDirectory(candidate1);
+            if (!Directory.Exists(lfsPath))
+                Directory.CreateDirectory(lfsPath);
 
-            if (Directory.Exists(candidate1))
-                return candidate1;
+            if (Directory.Exists(lfsPath))
+                return lfsPath;
 
             throw new DirectoryNotFoundException("Unable to determine LfsPath.");
         }
@@ -34,8 +32,7 @@ namespace Bonobo.Git.Server.Git.GitLfs
             string appDataPath = DetermineRootDataPath();
             string firstTwo = (oid + "xx").Substring(0, 2).ToLower();
             string secondTwo = (oid + "xxyy").Substring(2, 2).ToLower();
-            //var filename = Path.Combine(appDataPath, "Lfs", repositoryName, firstTwo, secondTwo, oid);
-            var filename = Path.Combine(appDataPath, repositoryName, firstTwo, secondTwo, oid);
+            var filename = Path.Combine(appDataPath, repositoryName, "lfs", "objects", firstTwo, secondTwo, oid);
             return filename;
         }
 
