@@ -435,6 +435,7 @@
     <Compile Include="FilterProviders\UnityFilterAttributeFilterProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\config.xml" />
     <Content Include="App_Data\Git\antiword.exe" />
     <Content Include="App_Data\Git\basename.exe" />
     <Content Include="App_Data\Git\bash.exe" />
